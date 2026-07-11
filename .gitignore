@@ -1,0 +1,52 @@
+# Environments
+.venv/
+.venv_old/
+venv/
+ENV/
+env/
+
+# Node modules
+node_modules/
+frontend/node_modules/
+
+# Python cache and temporary files
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+
+# Databases
+*.db
+*.sqlite
+backend/instance/
+instance/
+backend/app.db
+
+# Build and distribution files
+dist/
+frontend/dist/
+build/
+out/
+
+# IDE / Editor folders
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# Local configuration files
+.env
+.env.local
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Agent logs / temporary files
+.gemini/
+.agents/
+.cortex/
