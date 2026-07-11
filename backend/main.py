@@ -28,6 +28,16 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 with app.app_context():
     db.create_all()
+    # Auto-seed the database if it is empty
+    from models.plant import Plant
+    try:
+        if not Plant.query.first():
+            print("Database is empty. Auto-seeding...")
+            from seed_database import seed_database
+            seed_database()
+            print("Database auto-seeded successfully!")
+    except Exception as e:
+        print(f"Error auto-seeding database: {e}")
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
@@ -47,4 +57,7 @@ def serve(path):
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    # Render or production should not run with debug=True
+    debug_mode = os.environ.get('FLASK_DEBUG', 'False').lower() == 'true'
+    app.run(host='0.0.0.0', port=port, debug=debug_mode)
